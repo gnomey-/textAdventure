@@ -1,0 +1,266 @@
+package zephyros;
+
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.util.Random;
+import java.util.Scanner;
+import javax.swing.JFrame;
+
+public class mainAdventure {
+	public static final int frameWidth = 240;
+	public static final int frameHeight = 160;
+	public static final int widthScale = frameWidth * 3;
+	public static final int heightScale = frameHeight * 3;
+
+	public static void textAdventure() {
+		
+		int keepGoingLooper = 0;
+		int resetGameLooper = 0;
+		int restartedGame = 0;
+		
+		while (restartedGame < 1) {
+			System.out.println("You wonder into a deep forest of Zephyros.");
+
+			while (keepGoingLooper < 1) {
+				resetGameLooper = 0;
+				keepGoingLooper = 0;
+				restartedGame = 1;
+				double randomEncounter = Math.random() * 100;
+
+				Scanner scanner = new Scanner(System.in);
+				System.out.print("Would you like to do?\n(k)Keep Going | (e)Eat | (d)Drink | (s)Show status | (q)Quit\n");
+				String keepGoingInput = scanner.next();
+
+				if (keepGoingInput.equals("k")) {
+					if (randomEncounter < 45) {
+						String[] possibleEvents = { "monster", "NPC", "situation" };
+						Random events = new Random();
+						String randomEvent = possibleEvents[events.nextInt(possibleEvents.length)];
+
+						if (randomEvent.equals("monster")) {
+							String[] monsters = { "spider", "goblin", "ogre", "skeleton", "dwarf", "slime", "wolf" };
+							Random randomMonster = new Random();
+							String possibleMonsters = monsters[randomMonster.nextInt(monsters.length)];
+
+							if (possibleMonsters.equals("spider")) {
+								System.out.println("You come across a giant spider.");
+								monsters.spiderEvent spiderEncounterEvent = new monsters.spiderEvent();
+								spiderEncounterEvent.spiderEncounter();
+							}
+							if (possibleMonsters.equals("goblin")) {
+								System.out.println("You come across a goblin.");
+								monsters.goblinEvent goblinEncounterEvent = new monsters.goblinEvent();
+								goblinEncounterEvent.goblinEncounter();
+							}
+							if (possibleMonsters.equals("ogre")) {
+								System.out.println("You come across an ogre.");
+								monsters.ogreEvent ogreEncounterEvent = new monsters.ogreEvent();
+								ogreEncounterEvent.ogreEncounter();
+							}
+							if (possibleMonsters.equals("skeleton")) {
+								System.out.println("You come across a skeleton.");
+								monsters.skeletonEvent skeletonEncounterEvent = new monsters.skeletonEvent();
+								skeletonEncounterEvent.skeletonEncounter();
+							}
+							if (possibleMonsters.equals("dwarf")) {
+								System.out.println("You come across a dwarf.");
+								monsters.dwarfEvent dwarfEncounterEvent = new monsters.dwarfEvent();
+								dwarfEncounterEvent.dwarfEncounter();
+							}
+							if (possibleMonsters.equals("slime")) {
+								System.out.println("You come across a slime.");
+								monsters.slimeEvent slimeEncounterEvent = new monsters.slimeEvent();
+								slimeEncounterEvent.slimeEncounter();
+							}
+							if (possibleMonsters.equals("wolf")) {
+								System.out.println("You come across a wild wolf.");
+								monsters.wolfEvent wolfEncounterEvent = new monsters.wolfEvent();
+								wolfEncounterEvent.wolfEncounter();
+							}
+						}
+						if (randomEvent.equals("NPC")) {
+							String[] NPCs = { "imp", "demon", "merchant", "merchant", "fairy", "dryad" };
+							Random randomNPC = new Random();
+							String possibleNPCs = NPCs[randomNPC.nextInt(NPCs.length)];
+
+							if (possibleNPCs.equals("imp")) {
+								System.out.println("You come across an imp.");
+								npcs.impEvent impEncounterEvent = new npcs.impEvent();
+								impEncounterEvent.impEncounter();
+							}
+							if (possibleNPCs.equals("demon")) {
+								System.out.println("You come across a demon.");
+								npcs.demonEvent demonEncounterEvent = new npcs.demonEvent();
+								demonEncounterEvent.demonEncounter();
+							}
+							if (possibleNPCs.equals("merchant")) {
+								System.out.println("You come across a merchant.");
+								npcs.merchantEvent merchantEncounterEvent = new npcs.merchantEvent();
+								merchantEncounterEvent.merchantEncounter();
+							}
+							if (possibleNPCs.equals("fairy")) {
+								System.out.println("You come across a fairy.");
+								npcs.fairyEvent fairyEncounterEvent = new npcs.fairyEvent();
+								fairyEncounterEvent.fairyEncounter();
+							}
+							if (possibleNPCs.equals("dryad")) {
+								System.out.println("You come across a dryad.");
+								npcs.dryadEvent dryadEncounterEvent = new npcs.dryadEvent();
+								dryadEncounterEvent.dryadEncounter();
+							}
+						}
+						if (randomEvent.equals("situation")) {
+							String[] situations = { "goblincamp", "wisp", "traveller", "thief", "distance", "coin", "coin", "coin", "river", "pond", "arrow" };
+							Random randomSituation = new Random();
+							String possibleSituations = situations[randomSituation.nextInt(situations.length)];
+
+							if (possibleSituations.equals("goblincamp")) {
+								System.out.println("You come across a goblin camp.");
+								situations.goblincampEvent goblincampEncounterEvent = new situations.goblincampEvent();
+								goblincampEncounterEvent.goblincampEncounter();
+							}
+							if (possibleSituations.equals("wisp")) {
+								System.out.println("You come across a wisp.");
+								situations.wispEvent wispEncounterEvent = new situations.wispEvent();
+								wispEncounterEvent.wispEncounter();
+							}
+							if (possibleSituations.equals("traveller")) {
+								System.out.println("You come across a traveller.");
+								situations.travellerEvent travellerEncounterEvent = new situations.travellerEvent();
+								travellerEncounterEvent.travellerEncounter();
+							}
+							if (possibleSituations.equals("thief")) {
+								System.out.println("A thief ambushes and tries to rob you!");
+								situations.thiefEvent thiefEncounterEvent = new situations.thiefEvent();
+								thiefEncounterEvent.thiefEncounter();
+							}
+							if (possibleSituations.equals("distance")) {
+								System.out.println("You see something off into the distance.");
+								situations.distanceEvent distanceEncounterEvent = new situations.distanceEvent();
+								distanceEncounterEvent.distanceEncounter();
+							}
+							if (possibleSituations.equals("coin")) {
+								System.out.println("You found a coin!");
+								statusStorage.coins++;
+							}
+							if (possibleSituations.equals("river")) {
+								System.out.println("You come across a river.");
+								situations.riverEvent riverEncounterEvent = new situations.riverEvent();
+								riverEncounterEvent.riverEncounter();
+							}
+							if (possibleSituations.equals("pond")) {
+								System.out.println("You come across a pond.");
+								situations.pondEvent pondEncounterEvent = new situations.pondEvent();
+								pondEncounterEvent.pondEncounter();
+							}
+							if (possibleSituations.equals("arrow")) {
+								situations.arrowEvent arrowEncounterEvent = new situations.arrowEvent();
+								arrowEncounterEvent.arrowEncounter();
+							}
+						}
+					} else {
+						System.out.print("You continue further into the forest... \n");
+					}
+					statusStorage.thirst -= statusStorage.thirstDecrease;
+					statusStorage.hunger -= statusStorage.hungerDecrease;
+					if (statusStorage.hunger >= 80) {
+						statusStorage.health += 2;
+					}
+					if (statusStorage.health > 100) {
+						statusStorage.health = 100;
+					}
+					if (statusStorage.thirst > 100) {
+						statusStorage.thirst = 100;
+					}
+					if (statusStorage.hunger > 100) {
+						statusStorage.hunger = 100;
+					}
+					if (statusStorage.coins <= 0) {
+						statusStorage.coins = 0;
+					}
+					if (statusStorage.thirst <= 20) {
+						System.out.println("You are thirsty!");
+					}
+					if (statusStorage.hunger <= 20) {
+						System.out.println("You are hungry!");
+					}
+					if (statusStorage.thirst <= 0) {
+						statusStorage.thirst = 0;
+						statusStorage.health -= 10;
+						System.out.println("You are dying from thirst!");
+					}
+					if (statusStorage.hunger <= 0) {
+						statusStorage.hunger = 0;
+						statusStorage.health -= 10;
+						System.out.println("You are dying from hunger!");
+					}
+					if (statusStorage.health <= 0) {
+						statusStorage.health = 0;
+						while (resetGameLooper < 1) {
+							System.out.println("You are dead.\nYou have met a terrible fate haven't you?");
+							System.out.println("Score: " + statusStorage.moves + statusStorage.coins * 2 + statusStorage.kills * 3);
+							System.out.println("Would you like to play again?");
+							String resetGameInput = scanner.next();
+							if (resetGameInput.equals("y")) {
+								zephyros.statusStorage resetGame = new zephyros.statusStorage();
+								resetGame.gameReset();
+								resetGameLooper++;
+								restartedGame = 0;
+							}
+							if (resetGameInput.equals("n")) {
+								System.out.println("Then never come back!");
+								System.out.println("Final score: " + statusStorage.moves + statusStorage.coins * 2 + statusStorage.kills * 3);
+								keepGoingLooper++;
+								resetGameLooper++;
+							}
+						}
+					}
+				}
+				if (keepGoingInput.equals("q")) {
+					System.out.println("Then never come back!");
+					System.out.println("Score: " + statusStorage.moves + statusStorage.coins * 2 + statusStorage.kills * 3);
+					keepGoingLooper++;
+				}
+				if (keepGoingInput.equals("d")) {
+					if (statusStorage.drink > 0) {
+						System.out.println("You drink some water.");
+						statusStorage.thirst += 75;
+						statusStorage.drink--;
+					} else {
+						System.out.println("You have no drink!");
+					}
+				}
+				if (keepGoingInput.equals("e")) {
+					if (statusStorage.food > 0) {
+						System.out.println("You eat some food");
+						statusStorage.hunger += 50;
+						statusStorage.food--;
+					} else {
+						System.out.println("You have no food!");
+					}
+				}
+				if (keepGoingInput.equals("s")) {
+					System.out.println("Health: " + Math.round(statusStorage.health) + " | Hunger: " + Math.round(statusStorage.hunger) + " | Thirst: " + Math.round(statusStorage.thirst) + " | Coins: " + statusStorage.coins + " | Food: " + statusStorage.food + " | Water: " + statusStorage.drink);
+				}
+				statusStorage.moves += 1;
+			}
+		}
+	}
+
+	public static void main(String args[]) {
+		JFrame frame = new JFrame("Text Adventure!");
+		BufferedImage cursor = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+		Cursor blank = Toolkit.getDefaultToolkit().createCustomCursor(cursor, new Point(0, 0), "blank");
+		mainAdventure game = new mainAdventure();
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(widthScale, heightScale);
+		frame.setLocationRelativeTo(null);
+		frame.setResizable(false);
+		frame.setVisible(true);
+		
+		mainAdventure.textAdventure();
+	}
+}
